@@ -42,7 +42,6 @@ var doctype = `
 `;
 
 var excludedMeta = [
-  'leadingDigits',
   'noInternationalDialling',
   'pager',
   'personalNumber',
