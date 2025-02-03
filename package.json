@@ -12,7 +12,7 @@
   "dependencies": {
     "@node-minify/core": "^6.2.0",
     "@node-minify/google-closure-compiler": "^6.2.0",
-    "filterxml": "^1.1.4"
+    "filterxml": "^1.1.5"
   },
   "devDependencies": {
     "chai": "^4.2.0",
