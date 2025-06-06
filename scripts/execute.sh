@@ -8,6 +8,7 @@ cp src/PhoneNumberMetadata.xml libphonenumber/resources/PhoneNumberMetadata.xml
 cp src/PhoneNumberMetadataForTesting.xml libphonenumber/resources/PhoneNumberMetadataForTesting.xml
 
 ant -f libphonenumber/java/build.xml build-js-metadata
+# The compile-demo step is currently disabled because it is not required for the build process. 
 # ant -f libphonenumber/javascript/build.xml compile-demo
 
 mkdir dist
