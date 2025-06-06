@@ -50,3 +50,8 @@ sh scripts/execute.sh
 
 [![@superhit0](https://avatars.githubusercontent.com/superhit0?size=50)](https://github.com/superhit0) | [![@patw0929](https://avatars.githubusercontent.com/patw0929?size=50)](https://github.com/patw0929) | [![@nutboltu](https://avatars.githubusercontent.com/nutboltu?size=50)](https://github.com/nutboltu)
 ----|-----|-----
+
+## Updating google libphonenumber lib
+1. Bump googleLibphonenumberVersion in package.json to whichever version is necessary.
+2. Rerun instructons above to build dependencies and compile.
+3. Push changes
