@@ -47,3 +47,4 @@ libphonenumber/
 #generated files
 src/PhoneNumberMetadata.xml
 src/PhoneNumberMetadataForTesting.xml
+package-lock.json
