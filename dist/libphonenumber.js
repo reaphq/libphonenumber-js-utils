@@ -612,3 +612,96 @@ MO:[,[,,"9\\d\\d",,,,,,,[3]],,,[,,"999",,,,"999"],[,,,,,,,,,[-1]],,,,"MO",,,,,,,
 ,"1(?:12|5)",,,,"15"],,[,,"1(?:12|5)",,,,"15"],[,,,,,,,,,[-1]],[,,,,,,,,,[-1]],,[,,,,,,,,,[-1]]],ZA:[,[,,"[134]\\d{2,4}",,,,,,,[3,4,5]],,,[,,"1(?:01\\d\\d|12)",,,,"112",,,[3,5]],[,,"41(?:348|851)",,,,"41348",,,[5]],,,,"ZA",,,,,,,,,,,,,,,,,,[,,"1(?:01(?:11|77)|12)",,,,"112",,,[3,5]],,[,,"1(?:0(?:1(?:11|77)|20|7)|1[12]|77(?:3[237]|[45]7|6[279]|9[26]))|[34]\\d{4}",,,,"107"],[,,"3(?:078[23]|7(?:064|567)|8126)|4(?:394[16]|7751|8837)|4[23]699",,,,"30782",,,[5]],[,,"111",,,,"111",,,[3]],,[,,"[34]\\d{4}",
 ,,,"30000",,,[5]]],ZM:[,[,,"[19]\\d\\d",,,,,,,[3]],,,[,,"112|99[139]",,,,"112"],[,,,,,,,,,[-1]],,,,"ZM",,,,,,,,,,,,,,,,,,[,,"112|99[139]",,,,"112"],,[,,"112|99[139]",,,,"112"],[,,,,,,,,,[-1]],[,,,,,,,,,[-1]],,[,,,,,,,,,[-1]]],ZW:[,[,,"[139]\\d\\d(?:\\d{2})?",,,,,,,[3,5]],,,[,,"112|9(?:5[023]|61|9[3-59])",,,,"112",,,[3]],[,,"3[013-57-9]\\d{3}",,,,"30000",,,[5]],,,,"ZW",,,,,,,,,,,,,,,,,,[,,"112|99[3-59]",,,,"112",,,[3]],,[,,"11[2469]|3[013-57-9]\\d{3}|9(?:5[023]|6[0-25]|9[3-59])",,,,"112"],[,,,,,,,
 ,,[-1]],[,,"114|9(?:5[023]|6[0-25])",,,,"114",,,[3]],,[,,,,,,,,,[-1]]]};q(ib);var B=ra.ea(),ba=["phoneNumberParser"],L=hc;ba[0]in L||"undefined"==typeof L.execScript||L.execScript("var "+ba[0]);for(var V;ba.length&&(V=ba.shift());)ba.length||void 0===lb?L[V]&&L[V]!==Object.prototype[V]?L=L[V]:L=L[V]={}:L[V]=lb})();
+// Create and expose intlTelInputUtils
+// Since i18n.phonenumbers namespace is not available after Google Closure Compiler minification,
+// we need to use the hardcoded enum values like the original libphonenumber.js does
+
+const intlTelInputUtils = {
+  // Format a number to the given format
+  formatNumber: function(number, countryCode, format) {
+    if (typeof formatNumber === 'function') {
+      return formatNumber(number, countryCode, format);
+    }
+    return number;
+  },
+
+  // Get an example number for the given country code
+  getExampleNumber: function(countryCode, national, numberType) {
+    if (typeof getExampleNumber === 'function') {
+      return getExampleNumber(countryCode, national, numberType);
+    }
+    return '';
+  },
+
+  // Get the extension from a number
+  getExtension: function(number, countryCode) {
+    if (typeof getExtension === 'function') {
+      return getExtension(number, countryCode);
+    }
+    return '';
+  },
+
+  // Get the type of the number
+  getNumberType: function(number, countryCode) {
+    if (typeof getNumberType === 'function') {
+      return getNumberType(number, countryCode);
+    }
+    return -1;
+  },
+
+  // Check if a number is valid
+  isValidNumber: function(number, countryCode) {
+    if (typeof isValidNumber === 'function') {
+      return isValidNumber(number, countryCode);
+    }
+    return false;
+  },
+
+  // Number format enum - using the same hardcoded values as src/libphonenumber.js
+  // These correspond to i18n.phonenumbers.PhoneNumberFormat but are available after compilation
+  numberFormat: {
+    E164: 0,
+    INTERNATIONAL: 1,
+    NATIONAL: 2,
+    RFC3966: 3
+  },
+
+  // Number type enum - using the same hardcoded values as src/libphonenumber.js  
+  // These correspond to i18n.phonenumbers.PhoneNumberType but are available after compilation
+  numberType: {
+    FIXED_LINE: 0,
+    MOBILE: 1,
+    FIXED_LINE_OR_MOBILE: 2,
+    TOLL_FREE: 3,
+    PREMIUM_RATE: 4,
+    SHARED_COST: 5,
+    VOIP: 6,
+    PERSONAL_NUMBER: 7,
+    PAGER: 8,
+    UAN: 9,
+    VOICEMAIL: 10,
+    UNKNOWN: -1
+  },
+
+  // Validation error enum - using the same hardcoded values as src/libphonenumber.js
+  // These correspond to i18n.phonenumbers.PhoneNumberUtil.ValidationResult
+  validationError: {
+    IS_POSSIBLE: 0,
+    INVALID_COUNTRY_CODE: 1,
+    TOO_SHORT: 2,
+    TOO_LONG: 3,
+    NOT_A_NUMBER: 4
+  }
+};
+
+// Expose to global scope
+if (typeof window !== 'undefined') {
+  window.intlTelInputUtils = intlTelInputUtils;
+} else if (typeof global !== 'undefined') {
+  global.intlTelInputUtils = intlTelInputUtils;
+}
+
+// Only export in Node.js environments
+if (typeof module !== 'undefined' && module.exports) {
+  module.exports = intlTelInputUtils;
+} 
