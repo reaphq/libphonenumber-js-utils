@@ -704,4 +704,12 @@ if (typeof window !== 'undefined') {
 // Only export in Node.js environments
 if (typeof module !== 'undefined' && module.exports) {
   module.exports = intlTelInputUtils;
+}
+// Export for AMD/RequireJS
+if (typeof define === 'function' && define.amd) {
+  define([], function() { return intlTelInputUtils; });
+}
+// Export for ES Modules (if supported by bundler)
+if (typeof exports === 'object' && typeof exports.default === 'undefined') {
+  exports.default = intlTelInputUtils;
 } 
