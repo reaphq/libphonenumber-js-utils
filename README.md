@@ -27,7 +27,7 @@ validationError | Enum | **Possible Values:**<br>&bull; `IS_POSSIBLE` <br>&bull;
 
 ## How to build it
 
-### Install Dependencies
+### Install Dependencies & Compile
 
 Install `maven` and `ant`. For MacOS
 
@@ -39,20 +39,21 @@ brew install maven
 ```sh
 sh scripts/build-dependencies.sh
 ```
-delete 
-
-### Compile
-
-1. Delete <arg line="--jscomp_error=undefinedNames" /> in libphonenumber/javascript/build.xml to allow the build to succeed
-2. Convert the built libphonenumber/javascript/i18n/phonenumbers/compile-demo.js from ecmascript2020 to es5 (https://jstool.gitlab.io/babel-es6-to-es5/)
-3. Delete the "@babel/helpers - typeof" text in the generated code.
-4. Run the execute script
-5. Push branch.
 
 ```sh
 sh scripts/execute.sh
 ```
 
+### Updating underlying google libphonenumber library
+
+1. Bump googleLibphonenumberVersion in package.json to updated version.
+2. Build dependencies with `sh scripts/build-dependencies.sh`
+3. Delete `<arg line="--jscomp_error=undefinedNames" />` flag in libphonenumber/javascript/build.xml to allow the execution script to succeed.
+4. Convert the built libphonenumber/javascript/i18n/phonenumbers/compile-demo.js from ecmascript2020 to es5 (https://jstool.gitlab.io/babel-es6-to-es5/)
+5. Delete the "@babel/helpers - typeof" text in the generated code.
+6. Run the execute script `sh scripts/execute.sh`
+7. Check that the dist/libphonenumber.js is generated successfully.
+8. Push code.
 
 ## Contributors
 
